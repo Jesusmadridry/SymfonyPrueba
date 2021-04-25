@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block body %}
+  <div class="container" style="width: 600px;">
+    <h1 style="text-align:center;">Edit Product</h1>
+    {{ form_start(form) }} {# Form initialization #}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+  </div>
+{% endblock %}

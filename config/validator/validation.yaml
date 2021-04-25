@@ -1,0 +1,9 @@
+App\Entity\Product:
+    properties:
+        code:
+            - Length:
+                min: 4
+                max: 10
+                minMessage: 'The code must be at least {{ limit }} characters long'
+                maxMessage: 'The code cannot be longer than {{ limit }} characters'
+

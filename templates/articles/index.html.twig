@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticlesController!{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/new/product">New Product</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/new/category">New Category</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    {% if products %}
+        <table id="products" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td> descomentar
+                        {# <td>{{ product }}</td>  #}
+                        <td>
+                            <a href="/article/{{ product.id }}" class="btn btn-dark">Show</a> 
+                            <a href="/article/{{ product.id }}" class="btn btn-light">Edit</a>
+                            {# <a href="/product/{{ product }}" class="btn btn-dark">Show</a>
+                            {#<a href="/product/edit{{ product }}" class="btn btn-light">Edit</a> #}
+                            <a href="#" class="btn btn-danger delete-article" data-id={{ product.id}}>Delete</a>
+                            {# <a href="#" class="btn btn-danger delete-article" data-id={{ product}}>Delete</a> #}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    {% else  %}
+        <p>No articles to display</p>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/main.js"></script>
+{% endblock %}
