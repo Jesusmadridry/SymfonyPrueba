@@ -134,7 +134,7 @@ class ArticlesController extends AbstractController
             array('class' => 'form-control',
                   'placeholder' => 'Enter the price here')))
             ->add('updatedAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
+            array('class' => '')))
             ->add('create', SubmitType::class, array(
                 'label' => 'EDIT PRODUCT',
                 'attr' => array('class' => 'btn btn-primary btn-lg mt-3')

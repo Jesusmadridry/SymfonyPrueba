@@ -31,13 +31,12 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createFormBuilder($category)
             ->add('name', TextType::class, array('attr' => 
-            array('class' => 'form-control')))
+            array('class' => 'form-control',
+                  'minlength' => 4)))
             ->add('active', CheckboxType::class, array(
                 'attr' => array('class' => ' form-check-input', 'minlength' => 4) 
             ))
-            ->add('createdAt', DateTimeType::class, array('attr' => array('class' => 'js-datepicker'), 
-             'html5' => false))
-            ->add('updatedAt', DateTimeType::class, array('attr' => array('class' => 'js-datepicker'),
+            ->add('createdAt', DateTimeType::class, array('attr' => array(''), 
              'html5' => false))
             ->add('create', SubmitType::class, array(
                 'label' => 'CREATE CATEGORY',
@@ -47,6 +46,8 @@ class CategoryController extends AbstractController
 
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
+                $updatedAt = $form->get('createdAt')->getData();
+                $category->setUpdatedAt($updatedAt);
                 $category = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($category);
