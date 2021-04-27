@@ -6,9 +6,15 @@
 {% block body %}
   <div class="container" style="width: 600px;">
     <h1 style="text-align:center;">Create New Product</h1>
-    {{ form_start(form) }} {# Form initialization #}
-    {{ form_widget(form) }}
+    {{ form_start(form) }}
+    {{ form(form) }}
     {{ form_end(form) }}
+    <br>
+    <a href="/">Go back </a>
   </div>
+
   
+{% endblock %}
+
+{% block javascripts %}
 {% endblock %}

@@ -50,24 +50,34 @@ class ArticlesController extends AbstractController
         $product = new Product();
 
         $form = $this->createFormBuilder($product)
-            ->add('code', TextType::class, array('attr' => 
-            array('class' => 'form-control')))
+            ->add('code', TextType::class, array(
+            'attr' => 
+            array('class' => 'form-control',  
+                  'placeholder' => 'Enter the code here',
+                  'minlength' => 4, 
+                  'maxlength' => 10)
+            ))
             ->add('name', TextType::class, array('attr' => 
-            array('class' => 'form-control', 'minlength' => 4)))
+            array('class' => 'form-control', 
+                  'placeholder' => 'Enter the name here',
+                  'minlength' => 4)))
             ->add('description', TextareaType::class, array(
-                'attr' => array('class' => 'form-control')
+                'attr' => array('class' => 'form-control',
+                                'placeholder' => 'Enter the description here')
             ))
             ->add('brand', TextType::class, array('attr' => 
-            array('class' => 'form-control')))
+            array('class' => 'form-control',
+                  'placeholder' => 'Enter the brand here')))
             ->add('category',  EntityType::class, [
                 'attr' => ['class' => 'form-select'],
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name'
             ])
             ->add('price', NumberType::class, array('attr' => 
-            array('class' => 'form-control')))
-            ->add('createdAt', DateTimeType::class, array('attr' => ['class' => 'js-datepicker']))
-            ->add('updatedAt', DateTimeType::class, array('attr' => ['class' => 'js-datepicker'],))
+            array('class' => 'form-control',
+                  'placeholder' => 'Enter the price here')))
+            ->add('createdAt', DateTimeType::class, array('attr' => ['class' => 'form-control js-datepicker'],
+             'html5' => FALSE  ))
             ->add('create', SubmitType::class, array(
                 'label' => 'CREATE PRODUCT',
                 'attr' => array('class' => 'btn btn-primary btn-lg')
@@ -76,7 +86,8 @@ class ArticlesController extends AbstractController
 
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
-                // $product.setCategory();
+                $updatedAt = $form->get('createdAt')->getData();
+                $product->setUpdatedAt($updatedAt);
                 $product = $form->getData();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($product);
@@ -97,14 +108,22 @@ class ArticlesController extends AbstractController
     public function editProduct(Request $request, $id){
         $product = new Product();
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        $createdAt = $product->getCreatedAt();
 
         $form = $this->createFormBuilder($product)
             ->add('code', TextType::class, array('attr' => 
-            array('class' => 'form-control', 'minlength' => 4, 'maxlength' => 10)))
+            array('class' => 'form-control',
+                             'placeholder' => 'Enter the code here',
+                             'minlength' => 4,
+                             'maxlength' => 10)))
             ->add('name', TextType::class, array('attr' => 
-            array('class' => 'form-control', 'minlength' => 4)))
+            array('class' => 'form-control', 
+                             'placeholder' => 'Enter the name here',
+                             'minlength' => 4)))
             ->add('description', TextareaType::class, array(
-                'attr' => array('class' => 'form-control')
+                'attr' => array('class' => 'form-control',
+                                'placeholder' => 'Enter the code here',
+                                'maxlength' => 280)
             ))
             ->add('category',  EntityType::class, [
                 'attr' => ['class' => 'form-select'],
@@ -114,9 +133,8 @@ class ArticlesController extends AbstractController
             ->add('brand', TextType::class, array('attr' => 
             array('class' => 'form-control')))
             ->add('price', NumberType::class, array('attr' => 
-            array('class' => 'form-control')))
-            ->add('createdAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
+            array('class' => 'form-control',
+                  'placeholder' => 'Enter the price here')))
             ->add('updatedAt', DateTimeType::class, array('attr' => 
             array('class' => 'form-control')))
             ->add('create', SubmitType::class, array(
@@ -127,7 +145,9 @@ class ArticlesController extends AbstractController
 
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
+                $product->setCreatedAt($createdAt);
                 $em = $this->getDoctrine()->getManager();
+                $em->persist($product);
                 $em->flush();
 
                 return $this->redirectToRoute('products_list');

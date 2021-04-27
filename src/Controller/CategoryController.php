@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
                     'info',
                     'Added successfully!'
                 );
-                return $this->redirectToRoute('products_list');
+                return $this->redirectToRoute('new_category');
             }
             
             return $this->render('category/newCategory.html.twig', array(
