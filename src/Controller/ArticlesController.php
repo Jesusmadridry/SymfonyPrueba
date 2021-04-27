@@ -24,8 +24,8 @@ class ArticlesController extends AbstractController
      */
     public function index(): Response
     {
-        // $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $products = ['Article 1', 'Article 2'];
+        $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        // $products = ['Article 1', 'Article 2'];
         return $this->render('articles/index.html.twig', [
             'products' => $products,
         ]);
@@ -59,12 +59,9 @@ class ArticlesController extends AbstractController
             ))
             ->add('brand', TextType::class, array('attr' => 
             array('class' => 'form-control')))
-            ->add('category_id',  EntityType::class, [
-                'class' => Category::class,
-                'mapped' => false,
-                'choice_label' => function (Category $category){
-                                    return $category->getName();
-                },
+            ->add('category',  EntityType::class, [
+                'class' => 'App\Entity\Category',
+                'choice_label' => 'name'
             ])
             ->add('price', NumberType::class, array('attr' => 
             array('class' => 'form-control')))

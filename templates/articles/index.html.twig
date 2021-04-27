@@ -34,11 +34,11 @@
             <tbody>
                 {% for product in products %}
                     <tr>
-                        <td>{{ product.name }}</td> descomentar
+                        <td>{{ product.name }}</td>
                         {# <td>{{ product }}</td>  #}
                         <td>
-                            <a href="/article/{{ product.id }}" class="btn btn-dark">Show</a> 
-                            <a href="/article/{{ product.id }}" class="btn btn-light">Edit</a>
+                            <a href="/product/{{ product.id }}" class="btn btn-dark">Show</a> 
+                            <a href="/product/edit/{{ product.id }}" class="btn btn-light">Edit</a>
                             {# <a href="/product/{{ product }}" class="btn btn-dark">Show</a>
                             {#<a href="/product/edit{{ product }}" class="btn btn-light">Edit</a> #}
                             <a href="#" class="btn btn-danger delete-article" data-id={{ product.id}}>Delete</a>
