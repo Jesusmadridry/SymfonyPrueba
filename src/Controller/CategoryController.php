@@ -33,12 +33,12 @@ class CategoryController extends AbstractController
             ->add('name', TextType::class, array('attr' => 
             array('class' => 'form-control')))
             ->add('active', CheckboxType::class, array(
-                'attr' => array('class' => '', 'minlength' => 4) 
+                'attr' => array('class' => ' form-check-input', 'minlength' => 4) 
             ))
-            ->add('createdAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
-            ->add('updatedAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
+            ->add('createdAt', DateTimeType::class, array('attr' => array('class' => 'js-datepicker'), 
+             'html5' => false))
+            ->add('updatedAt', DateTimeType::class, array('attr' => array('class' => 'js-datepicker'),
+             'html5' => false))
             ->add('create', SubmitType::class, array(
                 'label' => 'CREATE CATEGORY',
                 'attr' => array('class' => 'btn btn-primary btn-lg mt-3')
@@ -51,7 +51,11 @@ class CategoryController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($category);
                 $em->flush();
-
+                
+                $this->addFlash(
+                    'info',
+                    'Added successfully!'
+                );
                 return $this->redirectToRoute('products_list');
             }
             

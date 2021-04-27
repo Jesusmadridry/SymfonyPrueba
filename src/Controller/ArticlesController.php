@@ -60,15 +60,14 @@ class ArticlesController extends AbstractController
             ->add('brand', TextType::class, array('attr' => 
             array('class' => 'form-control')))
             ->add('category',  EntityType::class, [
+                'attr' => ['class' => 'form-select'],
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name'
             ])
             ->add('price', NumberType::class, array('attr' => 
             array('class' => 'form-control')))
-            ->add('createdAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
-            ->add('updatedAt', DateTimeType::class, array('attr' => 
-            array('class' => 'form-control')))
+            ->add('createdAt', DateTimeType::class, array('attr' => ['class' => 'js-datepicker']))
+            ->add('updatedAt', DateTimeType::class, array('attr' => ['class' => 'js-datepicker'],))
             ->add('create', SubmitType::class, array(
                 'label' => 'CREATE PRODUCT',
                 'attr' => array('class' => 'btn btn-primary btn-lg')
@@ -108,6 +107,7 @@ class ArticlesController extends AbstractController
                 'attr' => array('class' => 'form-control')
             ))
             ->add('category',  EntityType::class, [
+                'attr' => ['class' => 'form-select'],
                 'class' => 'App\Entity\Category',
                 'choice_label' => 'name'
             ])
