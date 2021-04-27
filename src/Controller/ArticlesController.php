@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
@@ -76,11 +75,10 @@ class ArticlesController extends AbstractController
             ->add('price', NumberType::class, array('attr' => 
             array('class' => 'form-control',
                   'placeholder' => 'Enter the price here')))
-            ->add('createdAt', DateTimeType::class, array('attr' => ['class' => 'form-control js-datepicker'],
-             'html5' => FALSE  ))
+            ->add('createdAt', DateTimeType::class, array('attr' => ['class' => ''] ))
             ->add('create', SubmitType::class, array(
                 'label' => 'CREATE PRODUCT',
-                'attr' => array('class' => 'btn btn-primary btn-lg')
+                'attr' => array('class' => 'btn btn-primary btn-lg mt-3')
             ))
             ->getForm();
 
@@ -139,7 +137,7 @@ class ArticlesController extends AbstractController
             array('class' => 'form-control')))
             ->add('create', SubmitType::class, array(
                 'label' => 'EDIT PRODUCT',
-                'attr' => array('class' => 'btn btn-primary btn-lg')
+                'attr' => array('class' => 'btn btn-primary btn-lg mt-3')
             ))
             ->getForm();
 
