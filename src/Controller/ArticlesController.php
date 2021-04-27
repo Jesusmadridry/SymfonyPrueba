@@ -107,6 +107,10 @@ class ArticlesController extends AbstractController
             ->add('description', TextareaType::class, array(
                 'attr' => array('class' => 'form-control')
             ))
+            ->add('category',  EntityType::class, [
+                'class' => 'App\Entity\Category',
+                'choice_label' => 'name'
+            ])
             ->add('brand', TextType::class, array('attr' => 
             array('class' => 'form-control')))
             ->add('price', NumberType::class, array('attr' => 
